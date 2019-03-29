@@ -1,11 +1,12 @@
-package com.wulang;
+package com.wulang.consumer;
 
-import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import com.alibaba.rocketmq.client.exception.MQClientException;
-import com.alibaba.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
+import org.apache.rocketmq.common.message.MessageExt;
 
 import java.util.List;
 
@@ -14,9 +15,11 @@ public class Consumer2 {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(
                 "rmq-group");
 
-        consumer.setNamesrvAddr("10.0.17.79:9876");
+        consumer.setNamesrvAddr("10.0.17.134:9876");
         consumer.setInstanceName("consumer2");
-        consumer.subscribe("TopicA-test", "TagA");
+        consumer.subscribe("TopicTest", "TagA");
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+//        consumer.setMessageModel(MessageModel.BROADCASTING);
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
