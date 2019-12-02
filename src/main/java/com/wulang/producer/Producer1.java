@@ -20,10 +20,10 @@ public class Producer1 {
         producer.setInstanceName("producer1");
         producer.start();
         try {
-            for (int i = 0; i < 10; i++) {
-                Thread.sleep(1000);  //每秒发送一次MQ
+            for (int i = 0; i < 200; i++) {
+//                Thread.sleep(10000);  //每秒发送一次MQ
                 Message msg = new Message("TopicTest","TagA",("producer1 "+i).getBytes());
-                msg.setDelayTimeLevel(3);
+//                msg.setDelayTimeLevel(3);
                 SendResult sendResult = producer.send(msg);
             }
         } catch (Exception e) {

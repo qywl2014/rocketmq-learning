@@ -19,6 +19,7 @@ public class OrderedConsumer {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("example_group_name");
         consumer.setNamesrvAddr("10.0.17.134:9876");
         consumer.setInstanceName("orderconsumer");
+//        com.alibaba.rocketmq.common.consumer.ConsumeFromWhere
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
         consumer.subscribe("TopicTest", "TagA");
